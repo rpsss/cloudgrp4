@@ -6,32 +6,51 @@ extra_configs = {"fs.azure.account.key.stockagegrp4.blob.core.windows.net":dbuti
 
 # COMMAND ----------
 
-dfTest = spark.read.csv("/mnt/test.csv")
+dfTest = spark.read.csv("/mnt/test.csv", header=True)
 dfTest.drop("_c0")
 
+dfTest = dfTest.withColumnRenamed("N°_département_(BAN)","N°_département_BAN")
+dfTest = dfTest.withColumnRenamed("Code_postal_(BAN)","Code_postal_BAN")
+dfTest = dfTest.withColumnRenamed("Nom__commune_(Brut)","Nom__commune_Brut")
+dfTest = dfTest.withColumnRenamed("Code_INSEE_(BAN)","Code_INSEE_BAN")
+dfTest = dfTest.withColumnRenamed("Code_postal_(brut)","Code_postal_brut")
+
 # COMMAND ----------
 
-dfTrain = spark.read.csv("/mnt/train.csv")
+dfTrain = spark.read.csv("/mnt/train.csv", header=True)
 dfTrain.drop("_c0")
 
+dfTrain = dfTrain.withColumnRenamed("N°_département_(BAN)","N°_département_BAN")
+dfTrain = dfTrain.withColumnRenamed("Code_postal_(BAN)","Code_postal_BAN")
+dfTrain = dfTrain.withColumnRenamed("Nom__commune_(Brut)","Nom__commune_Brut")
+dfTrain = dfTrain.withColumnRenamed("Code_INSEE_(BAN)","Code_INSEE_BAN")
+dfTrain = dfTrain.withColumnRenamed("Code_postal_(brut)","Code_postal_brut")
+
 # COMMAND ----------
 
-dfVal = spark.read.csv("/mnt/val.csv")
+dfVal = spark.read.csv("/mnt/val.csv", header=True)
 dfVal.drop("_c0")
 
-# COMMAND ----------
 
-dfTrain.write.saveAsTable("TrainTable")
-
-
-# COMMAND ----------
-
-dfVal.write.saveAsTable("ValTable")
-
+dfVal = dfVal.withColumnRenamed("N°_département_(BAN)","N°_département_BAN")
+dfVal = dfVal.withColumnRenamed("Code_postal_(BAN)","Code_postal_BAN")
+dfVal = dfVal.withColumnRenamed("Nom__commune_(Brut)","Nom__commune_Brut")
+dfVal = dfVal.withColumnRenamed("Code_INSEE_(BAN)","Code_INSEE_BAN")
+dfVal = dfVal.withColumnRenamed("Code_postal_(brut)","Code_postal_brut")
 
 # COMMAND ----------
 
-dfTest.write.saveAsTable("TestTable")
+dfTrain.write.mode("overwrite").saveAsTable("TrainTable")
+
+
+# COMMAND ----------
+
+dfVal.write.mode("overwrite").saveAsTable("ValTable")
+
+
+# COMMAND ----------
+
+dfTest.write.mode("overwrite").saveAsTable("TestTable")
 
 
 # COMMAND ----------
