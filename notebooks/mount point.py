@@ -6,7 +6,7 @@ extra_configs = {"fs.azure.account.key.stockagegrp4.blob.core.windows.net":dbuti
 
 # COMMAND ----------
 
-dfTest = spark.read.csv("/mnt/test.csv", header=True)
+dfTest = spark.read.csv("/mnt/test.csv", header=True, inferSchema=True)
 dfTest.drop("_c0")
 
 dfTest = dfTest.withColumnRenamed("N°_département_(BAN)","N°_département_BAN")
@@ -17,7 +17,7 @@ dfTest = dfTest.withColumnRenamed("Code_postal_(brut)","Code_postal_brut")
 
 # COMMAND ----------
 
-dfTrain = spark.read.csv("/mnt/train.csv", header=True)
+dfTrain = spark.read.csv("/mnt/train.csv", header=True, inferSchema=True)
 dfTrain.drop("_c0")
 
 dfTrain = dfTrain.withColumnRenamed("N°_département_(BAN)","N°_département_BAN")
@@ -28,7 +28,7 @@ dfTrain = dfTrain.withColumnRenamed("Code_postal_(brut)","Code_postal_brut")
 
 # COMMAND ----------
 
-dfVal = spark.read.csv("/mnt/val.csv", header=True)
+dfVal = spark.read.csv("/mnt/val.csv", header=True, inferSchema=True)
 dfVal.drop("_c0")
 
 
